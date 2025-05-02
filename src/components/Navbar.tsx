@@ -1,7 +1,15 @@
 'use client';  // 这行必须放在文件最顶部
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
+import Link from 'next/link';
 import { navLinks, socialLinks } from '@/app/data/navigation';
+import { SignInButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+
+export function InteractiveHoverButtonDemo() {
+  return <InteractiveHoverButton>Hover Me</InteractiveHoverButton>;
+}
+
 
 export default function Navbar() {
   // 添加状态管理
@@ -12,48 +20,30 @@ export default function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    // 使用 pushState 更新 URL，但不触发页面刷新
-    window.history.pushState(null, '', `#${href}`);
-    // 手动触发 hashchange 事件
-    window.dispatchEvent(new HashChangeEvent('hashchange'));
-  }, []);
-
   return (
     <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-[2px] bg-gradient-to-b from-gray-100 to-gray-100/0 border-b border-b-gray-300/10 py-4">
       <div className="max-w-[1800px] mx-auto px-8">
         <div className="flex items-center justify-between">
           {/* 左侧 Logo + 导航链接组合 */}
           <div className="flex items-center">
-         
             {/* Logo */}
-            <a 
-              href="/#home" 
-              onClick={(e) => {
-                e.preventDefault();
-                window.history.pushState(null, '', '/');
-                window.dispatchEvent(new HashChangeEvent('hashchange'));
-              }} 
+            <Link
+              href="/"
               className="hidden lg:block font-fantasy text-2xl text-[#334155] mr-8"
             >
               Qiheyehua
-            </a>
-            
+            </Link>
             {/* 导航链接 - 大屏幕 */}
             <nav className="hidden lg:flex items-center">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={`#${link.href}`}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`flex items-center gap-x-1 text-[#334155] hover:text-[#1f2937] transition-colors ${
-                    link.name !== 'Books' ? 'mr-8' : ''
-                  }`}
+                  href={`/${link.href === 'works' ? '' : link.href}`}
+                  className={`flex items-center gap-x-1 text-[#334155] hover:text-[#1f2937] transition-colors mr-8`}
                 >
                   {link.icon && <link.icon className="w-5 h-5" />}
                   <span>{link.name}</span>
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
@@ -74,6 +64,28 @@ export default function Navbar() {
                   <link.icon className="w-5 h-5" />
                 </a>
               ))}
+            </div>
+            {/* 登录按钮和用户头像 */}
+            <div className="flex items-center space-x-4">
+              {/* 未登录时显示登录按钮 */}
+              <SignedOut>
+                <SignInButton mode="modal" forceRedirectUrl="/">
+                <InteractiveHoverButton>登录</InteractiveHoverButton>
+                </SignInButton>
+              </SignedOut>
+              {/* 登录后显示用户头像 */}
+              <SignedIn>
+                <UserButton 
+                  afterSignOutUrl="/"
+                  userProfileMode="navigation"
+                  userProfileUrl="/profile"
+                  appearance={{
+                    elements: {
+                      avatarBox: "h-10 w-10"
+                    }
+                  }}
+                />
+              </SignedIn>
             </div>
 
             {/* 汉堡菜单按钮 */}
@@ -99,19 +111,21 @@ export default function Navbar() {
           <nav className="mt-4 pb-4">
             <div className="flex flex-col space-y-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={`#${link.href}`}
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  href={`/${link.href === 'works' ? '' : link.href}`}
                   className="flex items-center gap-x-1 text-[#334155] hover:text-[#1f2937] transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {link.icon && <link.icon className="w-5 h-5" />}
                   <span>{link.name}</span>
-                </a>
+                </Link>
               ))}
             </div>
           </nav>
         </div>
+
+        
       </div>
     </header>
   );

@@ -10,6 +10,14 @@
   .animate-meteor {
     animation: meteor 5s linear infinite;
   }
+
+  .animate-marquee {
+    animation: marquee var(--duration, 40s) linear infinite;
+  }
+
+  .animate-marquee-vertical {
+    animation: marquee-vertical var(--duration, 40s) linear infinite;
+  }
 }
 
 @keyframes orbit {
@@ -35,6 +43,24 @@
   100% {
     transform: rotate(var(--angle)) translateX(-500px);
     opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-100% - var(--gap)));
   }
 }
 

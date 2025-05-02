@@ -2,36 +2,35 @@ import { FaGithub, } from 'react-icons/fa';
 import { SiBilibili, SiCsdn, SiTiktok, SiNeteasecloudmusic } from 'react-icons/si';
 import { LuAperture } from 'react-icons/lu';
 
+
 export const navLinks = [
   {
     name: 'Favorites',
-    href: 'works',
+    href: '/',
     icon: LuAperture
   },
   {
-    name: 'Photo',
-    href: 'photo',
-    slideIndex: 1
+    name: '项目',
+    href: 'project',
   },
   {
     name: 'Code',
     href: 'code',
-    slideIndex: 2
   },
   {
-    name: 'Game',
-    href: 'game',
-    slideIndex: 3
+    name: '留言墙',
+    href: 'Messagewall',
+   
   },
   {
     name: 'Music',
     href: 'music',
-    slideIndex: 4
+   
   },
   {
     name: 'Cartoon',
     href: 'cartoon',
-    slideIndex: 5
+    
   }
 ];
 

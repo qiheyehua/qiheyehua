@@ -1,124 +1,99 @@
-import React from 'react';
-import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { client } from '../lib/sanity/lib/client';
-import { Meteors } from "@/components/magicui/meteors";
-// 获取所有项目
-async function getAllProjects() {
-  const query = `
-    *[_type == "project"] {
-      _id,
-      name,
-      url,
-      description,
-      "iconUrl": icon.asset->url,
-      _createdAt
-    } | order(_createdAt desc)
-  `;
-  const data = await client.fetch(query);
-  
-  return data;
-}
+import { IconCloud } from "@/components/magicui/icon-cloud";
+import { Lens } from "@/components/magicui/lens";
+import { SpinningText } from "@/components/magicui/spinning-text";
+import { PinContainer } from "@/components/ui/3d-pin";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+import ColourfulText from "@/components/ui/colourful-text";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Pointer } from "@/components/magicui/pointer";
+const slugs = [
+  "typescript",
+  "javascript",
+  "dart",
+  "java",
+  "react",
+  "flutter",
+  "android",
+  "html5",
+  "css3",
+  "nodedotjs",
+  "express",
+  "nextdotjs",
+  "prisma",
+  "amazonaws",
+  "postgresql",
+  "firebase",
+  "nginx",
+  "vercel",
+  "testinglibrary",
+  "jest",
+  "cypress",
+  "docker",
+  "git",
+  "jira",
+  "github",
+  "gitlab",
+  "visualstudiocode",
+  "androidstudio",
+  "sonarqube",
+  "figma",
+];
 
-// 定义项目数据类型
-interface Project {
-  _id: string;
-  name: string;
-  url: string;
-  description: string;
-  iconUrl?: string;
-  _createdAt: string;
-}
-
-// 获取URL的主机名，带有错误处理
-function getHostname(url: string): string {
-  try {
-    return new URL(url).hostname;
-  } catch (error) {
-    // 如果URL不合法，返回原始链接或空字符串
-    return url.replace(/^https?:\/\//, '').split('/')[0] || '访问项目';
-  }
-}
-
-// 将组件转换为异步组件
-const WhiteModule = async () => {
-  // 从Sanity获取真实项目数据
-  const projects = await getAllProjects();
-  
-  //硬编码测试数据（如果Sanity接口不可用）
-  const fallbackProjects: Project[] = [
-    {
-      _id: "19d1e029-16dc-4b7f-8208-d9ddb7823502",
-      name: "在线简历展示",
-      url: "https://cali.so/projects",
-      description: "通过这个网站可以展示你的项目经历以及技能展示",
-      iconUrl: "https://cdn.sanity.io/images/w04355b9/production/5cc00e58b80c85ea508a6809f7897baa3ba883c5-1080x1080.jpg",
-      _createdAt: "2025-04-30T06:57:43Z"
-    }
-  ];
-
-  // 使用Sanity数据或回退到测试数据
-  const displayProjects = projects && projects.length > 0 ? projects : fallbackProjects;
+export function WhiteModule() {
+  const images = slugs.map(
+    (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`,
+  );
 
   return (
-    <div className="bg-white py-12">
-      <div className="container mx-auto px-4">
-        
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {displayProjects.map((project: Project, index: number) => (
-            <CardContainer key={project._id} className="w-full">
-              <CardBody className="h-auto w-full rounded-xl border border-gray-200 shadow-sm bg-white relative">
-                {/* 流星背景效果 */}
-                <div className="absolute inset-0 overflow-hidden rounded-xl">
-                  <Meteors number={8} />
-                </div>
-                
-                {/* 头像放在左上角 */}
-                <CardItem
-                  translateZ="80"
-                  className="absolute top-4 left-4 z-10"
-                >
-                  {project.iconUrl ? (
-                    <img
-                      src={project.iconUrl}
-                      alt={project.name}
-                      className="w-12 h-12 object-contain rounded-full border-2 border-white shadow-sm"
-                    />
-                  ) : (
-                    <div className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-sm">
-                      <span className="text-lg font-bold text-gray-600">
-                        {project.name.charAt(0)}
-                      </span>
-                    </div>
-                  )}
-                </CardItem>
-                
-                {/* 内容区域带上边距，为头像留出空间 */}
-                <CardItem translateZ="60" className="px-5 py-4 pt-20">
-                  <h3 className="text-lg font-bold mb-1.5">{project.name}</h3>
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-3">
-                    {project.description}
-                  </p>
-                  
-                  <CardItem
-                    as="a"
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    translateZ="80"
-                    className="flex items-center text-xs font-medium text-gray-500 hover:text-blue-600 transition-colors"
-                  >
-                    {getHostname(project.url)}
-                    <span className="ml-1" aria-hidden="true">↗</span>
-                  </CardItem>
-                </CardItem>
-              </CardBody>
-            </CardContainer>
-          ))}
+    <div className="relative flex size-full">
+      {/* 背景水滴 - BackgroundBeamsWithCollision 组件 */}
+      <BackgroundBeamsWithCollision>
+      {/* 指针 - Pointer 组件 */}
+      <Pointer className="fill-blue-500" />
+      {/* 左侧面板 - Lens 组件 */}
+      <div className="w-1/2 h-full flex items-center justify-center p-8 bg-white">
+        <Card className="relative max-w-md shadow-none">
+          <CardHeader>
+            <Lens
+              zoomFactor={2}
+              lensSize={150}
+              isStatic={false}
+              ariaLabel="Zoom Area"
+            >
+              <img
+                src="https://res.cloudinary.com/dqsej8eol/image/upload/v1738573813/674aa6090ebe5_vhudzp.jpg"
+                alt="image placeholder"
+                width={500}
+                height={500}
+              />
+            </Lens>
+          </CardHeader>
+          <CardContent>
+            <CardTitle className="text-2xl">七禾页话</CardTitle>
+            <CardDescription>
+              为什么是七禾页话？
+              因为七禾页是一个字,<ColourfulText text="锋芒内敛之意" />，我想说的话都在这个字里。
+            </CardDescription>
+          </CardContent>
+        </Card>
+      </div>
+      {/* 右侧面板 - IconCloud 组件 */}
+      <div className="w-1/2 h-full flex items-center justify-center p-8 bg-white">      
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold mb-4 text-gray-800">心灯已似风灯冷</h2>
+          <p className="text-gray-600 mb-6">希望终从以下生</p>
+          <IconCloud images={images} />
         </div>
       </div>
+      </BackgroundBeamsWithCollision>
     </div>
   );
-};
-
-export default WhiteModule; 
+}
+export default WhiteModule;
