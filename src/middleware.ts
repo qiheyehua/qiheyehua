@@ -1,8 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
 const isPublicRoute = createRouteMatcher([
+    '/',                // 首页
+    '/Messagewall',     // 留言墙页面(仅查看不留言)
     '/sign-in(.*)',
-    '/sign-up(.*)'
+    '/sign-up(.*)',
+    // 其他你想设为公开的页面...
 ])
 
 export default clerkMiddleware(async (auth, req) => {
