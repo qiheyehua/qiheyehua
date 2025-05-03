@@ -4,7 +4,7 @@ import { Marquee } from "@/components/magicui/marquee";
 import { usePathname } from 'next/navigation';
 import { SignedIn, SignedOut, SignInButton, useUser } from '@clerk/nextjs';
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
-import { MessageCard } from "./page";
+import { MessageCard } from "./MessageCard";
 import { Message } from "@/lib/db/schema";
 
 // 留言表单组件
