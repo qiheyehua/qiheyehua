@@ -136,14 +136,8 @@ const Main: React.FC = () => {
         <div className="flex justify-between items-center mt-20">
         <CardItem
             translateZ={20}
-            as="button"
-            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
-          >
-            去注册
-          </CardItem>
-          <CardItem
-            translateZ={20}
-            as="button"
+            as="a"
+            href="/Messagewall"
             className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
           >
             去留言

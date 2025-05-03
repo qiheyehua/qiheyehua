@@ -66,7 +66,7 @@ export default function Navbar() {
               ))}
             </div>
             {/* 登录按钮和用户头像 */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 ml-4">
               {/* 未登录时显示登录按钮 */}
               <SignedOut>
                 <SignInButton mode="modal" forceRedirectUrl="/">
@@ -77,11 +77,10 @@ export default function Navbar() {
               <SignedIn>
                 <UserButton 
                   afterSignOutUrl="/"
-                  userProfileMode="navigation"
-                  userProfileUrl="/profile"
+                  userProfileMode="modal"
                   appearance={{
                     elements: {
-                      avatarBox: "h-10 w-10"
+                      avatarBox: "h-8 w-8"
                     }
                   }}
                 />
