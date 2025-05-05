@@ -23,8 +23,8 @@ export const navLinks = [
    
   },
   {
-    name: 'Music',
-    href: 'music',
+    name: '文章',
+    href: 'article',
    
   },
   {

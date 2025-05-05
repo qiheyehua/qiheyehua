@@ -1,63 +1,195 @@
-import Link from 'next/link';
 
+import {
+  AnimatedSpan,
+  Terminal,
+  TypingAnimation,
+} from "@/components/magicui/terminal";
+import { File, Folder, Tree } from "@/components/magicui/file-tree";
+import { ScriptCopyBtn } from "@/components/magicui/script-copy-btn";
+const ELEMENTS = [
+  {
+    id: "1",
+    isSelectable: true,
+    name: "src",
+    children: [
+      {
+        id: "2",
+        isSelectable: true,
+        name: "app",
+        children: [
+          {
+            id: "3",
+            isSelectable: true,
+            name: "layout.tsx",
+          },
+          {
+            id: "4",
+            isSelectable: true,
+            name: "page.tsx",
+          },
+        ],
+      },
+      {
+        id: "5",
+        isSelectable: true,
+        name: "components",
+        children: [
+          {
+            id: "6",
+            isSelectable: true,
+            name: "header.tsx",
+          },
+          {
+            id: "7",
+            isSelectable: true,
+            name: "footer.tsx",
+          },
+        ],
+      },
+      {
+        id: "8",
+        isSelectable: true,
+        name: "lib",
+        children: [
+          {
+            id: "9",
+            isSelectable: true,
+            name: "utils.ts",
+          },
+        ],
+      },
+    ],
+  },
+];
 export default function CodePage() {
+  const customCommandMap = {
+    npm: "npm run dev",
+    yarn: "yarn dev",
+    pnpm: "pnpm dev",
+    bun: "bun dev",
+  };
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-8">代码页面</h1>
-      
-      <div className="mb-10 bg-gray-100 p-6 rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">代码示例</h2>
-        <pre className="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto">
-          <code>{`
-// 示例代码
-function helloWorld() {
-  console.log("你好，世界！");
-}
+    <section className="relative w-full px-4 py-2 md:py-8 overflow-hidden">
+      <div className="container mx-auto">
+        {/* 左右布局容器 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          {/* 左侧内容区 - 终端 */}
+          <div className="flex flex-col">
+          <Terminal>
+      <TypingAnimation>&gt; pnpm dlx shadcn@latest init</TypingAnimation>
+ 
+      <AnimatedSpan delay={1500} className="text-green-500">
+        <span>✔ Preflight checks.</span>
+      </AnimatedSpan>
+ 
+      <AnimatedSpan delay={2000} className="text-green-500">
+        <span>✔ Verifying framework. Found Next.js.</span>
+      </AnimatedSpan>
+ 
+      <AnimatedSpan delay={2500} className="text-green-500">
+        <span>✔ Validating Tailwind CSS.</span>
+      </AnimatedSpan>
+ 
+      <AnimatedSpan delay={3000} className="text-green-500">
+        <span>✔ Validating import alias.</span>
+      </AnimatedSpan>
+ 
+      <AnimatedSpan delay={3500} className="text-green-500">
+        <span>✔ Writing components.json.</span>
+      </AnimatedSpan>
+ 
+      <AnimatedSpan delay={4000} className="text-green-500">
+        <span>✔ Checking registry.</span>
+      </AnimatedSpan>
+ 
+      <AnimatedSpan delay={4500} className="text-green-500">
+        <span>✔ Updating tailwind.config.ts</span>
+      </AnimatedSpan>
+ 
+      <AnimatedSpan delay={5000} className="text-green-500">
+        <span>✔ Updating app/globals.css</span>
+      </AnimatedSpan>
+ 
+      <AnimatedSpan delay={5500} className="text-green-500">
+        <span>✔ Installing dependencies.</span>
+      </AnimatedSpan>
+ 
+      <AnimatedSpan delay={6000} className="text-blue-500">
+        <span>ℹ Updated 1 file:</span>
+        <span className="pl-2">- lib/utils.ts</span>
+      </AnimatedSpan>
+ 
+      <TypingAnimation delay={6500} className="text-muted-foreground">
+        Success! Project initialization completed.
+      </TypingAnimation>
+ 
+      <TypingAnimation delay={7000} className="text-muted-foreground">
+        You may now add components.
+      </TypingAnimation>
+    </Terminal>
+          </div>
 
-// React组件示例
-function ExampleComponent() {
-  const [count, setCount] = useState(0);
-  
-  return (
-    <div>
-      <p>你点击了 {count} 次</p>
-      <button onClick={() => setCount(count + 1)}>
-        点击我
-      </button>
-    </div>
+          {/* 右侧预留区域 */}
+          <div className="flex flex-col h-full">
+          <Tree
+        className="overflow-hidden rounded-md bg-background p-2"
+        initialSelectedId="7"
+        initialExpandedItems={[
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+        ]}
+        elements={ELEMENTS}
+      >
+        <Folder element="src" value="1">
+          <Folder value="2" element="app">
+            <File value="3">
+              <p>layout.tsx</p>
+            </File>
+            <File value="4">
+              <p>page.tsx</p>
+            </File>
+          </Folder>
+          <Folder value="5" element="components">
+            <Folder value="6" element="ui">
+              <File value="7">
+                <p>button.tsx</p>
+              </File>
+            </Folder>
+            <File value="8">
+              <p>header.tsx</p>
+            </File>
+            <File value="9">
+              <p>footer.tsx</p>
+            </File>
+          </Folder>
+          <Folder value="10" element="lib">
+            <File value="11">
+              <p>utils.ts</p>
+            </File>
+          </Folder>
+        </Folder>
+      </Tree>
+          </div>
+        </div>
+      </div>
+      <div>
+      <ScriptCopyBtn
+      showMultiplePackageOptions={true}
+      codeLanguage="shell"
+      lightTheme="nord"
+      darkTheme="vitesse-dark"
+      commandMap={customCommandMap}
+    />
+      </div>
+    </section>
   );
 }
-          `}</code>
-        </pre>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h3 className="text-lg font-bold mb-2">前端技术</h3>
-          <ul className="list-disc list-inside space-y-1">
-            <li>React</li>
-            <li>Next.js</li>
-            <li>TailwindCSS</li>
-            <li>TypeScript</li>
-          </ul>
-        </div>
-        
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h3 className="text-lg font-bold mb-2">后端技术</h3>
-          <ul className="list-disc list-inside space-y-1">
-            <li>Node.js</li>
-            <li>Express</li>
-            <li>MongoDB</li>
-            <li>GraphQL</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div className="mt-10 flex justify-center">
-        <Link href="/" className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
-          返回首页
-        </Link>
-      </div>
-    </div>
-  );
-} 

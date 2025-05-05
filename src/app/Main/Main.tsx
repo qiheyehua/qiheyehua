@@ -6,6 +6,7 @@ import { Icons } from "../data/icons";
 import { Meteors } from "@/components/magicui/meteors";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from 'react';
+import { Pointer } from "@/components/magicui/pointer";
 
 const Main: React.FC = () => {
   const [mounted, setMounted] = useState(false);
@@ -52,6 +53,36 @@ const Main: React.FC = () => {
   };
   return (
     <div className="relative overflow-hidden w-full text-white h-full flex items-center justify-center bg-white">
+      <Pointer>
+          <motion.div
+            animate={{
+              scale: [0.8, 1, 0.8],
+              rotate: [0, 5, -5, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="black"
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              className="lucide lucide-clover"
+            >
+              <path d="M16.17 7.83 2 22"/>
+              <path d="M4.02 12a2.827 2.827 0 1 1 3.81-4.17A2.827 2.827 0 1 1 12 4.02a2.827 2.827 0 1 1 4.17 3.81A2.827 2.827 0 1 1 19.98 12a2.827 2.827 0 1 1-3.81 4.17A2.827 2.827 0 1 1 12 19.98a2.827 2.827 0 1 1-4.17-3.81A1 1 0 1 1 4 12"/>
+              <path d="m7.83 7.83 8.34 8.34"/>
+            </svg>
+          </motion.div>
+        </Pointer>
       {/* 流星容器 */}
       <Meteors number={20} maxDuration={8}  />
       {/* 3D卡片容器 */}

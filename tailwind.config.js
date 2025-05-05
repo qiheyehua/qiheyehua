@@ -35,7 +35,42 @@ module.exports = {
         meteor: "meteor 5s linear infinite",
         orbit: "orbit calc(var(--duration) * 1s) linear infinite",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+            color: 'inherit',
+            a: {
+              color: 'inherit',
+              fontWeight: 500,
+              textDecoration: 'underline',
+              '&:hover': {
+                color: 'var(--tw-prose-links)',
+              },
+            },
+            code: {
+              color: 'var(--tw-prose-code)',
+              backgroundColor: 'var(--tw-prose-pre-bg)',
+              borderRadius: '0.25rem',
+              padding: '0.25rem 0.4rem',
+            },
+            'pre code': {
+              backgroundColor: 'transparent',
+              borderWidth: '0',
+              borderRadius: '0',
+              padding: '0',
+              fontWeight: 'inherit',
+              color: 'inherit',
+              fontSize: 'inherit',
+              fontFamily: 'inherit',
+              lineHeight: 'inherit',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

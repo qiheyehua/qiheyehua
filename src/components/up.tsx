@@ -4,6 +4,9 @@ import { TextAnimate } from "@/components/magicui/text-animate";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { client } from "@/lib/sanity/lib/client";
+import { Pointer } from "@/components/magicui/pointer";
+import { ScratchToReveal } from "@/components/magicui/scratch-to-reveal";
+import { FlipText } from "@/components/magicui/flip-text";
 
 export function Welcome() {
   // 定义状态来存储从Sanity获取的故事数据
@@ -53,6 +56,18 @@ export function Welcome() {
   return (
     // 顶部文字部分
     <div className="w-full flex mb-16">
+      <Pointer>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="12" cy="12" r="10" className="fill-purple-500" />
+            <circle cx="12" cy="12" r="5" className="fill-white" />
+          </svg>
+        </Pointer>
       {/* 左侧文字 div */}
       <div className="w-1/2 pl-[5%]">
         <div className="max-w-[600px] space-y-4">
@@ -70,18 +85,31 @@ export function Welcome() {
           
           <BoxReveal boxColor={"#212f3d"} duration={1}>
             <p className="text-[1.5rem] font-medium leading-relaxed">
+          
               这些故事令我印象深刻，我决定将它们分享给大家。
+            
             </p>
           </BoxReveal>
           
           <p className="text-[1.5rem] font-medium leading-relaxed">
             <span className="inline-block bg-[#3eede7] dark:bg-[#FFE4CC]/90 px-4 py-1 rounded-lg">
               <TextAnimate animation="blurInUp" by="character">
+              
                 讲述世界故事的方式有无数种，这是我的方式。
               </TextAnimate>
             </span>
           </p>
+          <ScratchToReveal
+            width={550}
+            height={250}
+            minScratchPercentage={70}
+            className="flex items-center justify-center overflow-hidden rounded-2xl border-2 bg-gray-100"
+            gradientColors={["#A97CF8", "#F38CB8", "#FDCC92"]}
+          >
+            <span className="text-2xl">Happy every day</span>
+          </ScratchToReveal>
         </div>
+        
       </div>
 
       {/* 右侧 div - 显示故事 */}

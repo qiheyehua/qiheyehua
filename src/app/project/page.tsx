@@ -2,6 +2,7 @@ import React from 'react';
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { client } from '@/lib/sanity/lib/client';
 import { Meteors } from "@/components/magicui/meteors";
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 // 获取所有项目
 async function getAllProjects() {
   const query = `
@@ -61,6 +62,7 @@ const WhiteModule = async () => {
 
   return (
     <div className="bg-white py-12">
+      <SmoothCursor />
       <div className="container mx-auto px-4">
         
         

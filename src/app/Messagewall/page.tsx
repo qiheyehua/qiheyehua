@@ -2,6 +2,7 @@ import React from 'react';
 import { getAllMessages } from "@/lib/db/queries";
 import ClientMessageWall from "./client";
 
+import { motion } from "motion/react";
 // 留言墙页面组件（服务器组件）
 export default async function MessagewallPage() {
   // 从数据库获取留言
@@ -13,7 +14,9 @@ export default async function MessagewallPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 py-10">
+      
       <div className="container mx-auto px-4">
+      
         <h1 className="text-5xl font-bold text-center mb-8 text-gray-900 dark:text-white">欢迎来到我的留言墙</h1>
         
         <p className="text-center mb-16 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">

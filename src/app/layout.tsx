@@ -1,6 +1,8 @@
 
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+// app/layout.tsx
+import 'easymde/dist/easymde.min.css'
 import {
   ClerkProvider,
   SignInButton,

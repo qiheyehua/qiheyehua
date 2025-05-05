@@ -4,6 +4,7 @@ import { SpinningText } from "@/components/magicui/spinning-text";
 import { PinContainer } from "@/components/ui/3d-pin";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import ColourfulText from "@/components/ui/colourful-text";
+
 import {
   Card,
   CardContent,
@@ -76,10 +77,10 @@ export function WhiteModule() {
             </Lens>
           </CardHeader>
           <CardContent>
-            <CardTitle className="text-2xl">七禾页话</CardTitle>
+            <CardTitle className="text-1xl">七禾页话</CardTitle>
             <CardDescription>
               为什么是七禾页话？
-              因为七禾页是一个字,<ColourfulText text="锋芒内敛之意" />，我想说的话都在这个字里。
+             <ColourfulText text=" 因为七禾页是一个字," />，我想说的话都在这个字里。
             </CardDescription>
           </CardContent>
         </Card>
