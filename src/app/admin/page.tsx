@@ -10,7 +10,7 @@ import {
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-export function AdminPage() {
+function AdminPage() {
   const links = [
     {
       label: "Dashboard",
