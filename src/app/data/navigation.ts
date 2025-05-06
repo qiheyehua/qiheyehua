@@ -24,7 +24,7 @@ export const navLinks = [
   },
   {
     name: '文章',
-    href: 'article',
+    href: 'articles',
    
   },
   {

@@ -11,6 +11,8 @@ const isPublicRoute = createRouteMatcher([
     '/photo',       // 照片
     '/sign-in(.*)', // 登录
     '/sign-up(.*)', // 注册
+    '/api/photos',
+    '/api/notifications',  // 添加此API路径为公共路由
     // 其他你想设为公开的页面...
 ])
 
