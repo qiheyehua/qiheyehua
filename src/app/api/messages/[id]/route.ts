@@ -6,8 +6,8 @@ import { revalidatePath } from "next/cache";
 // 删除特定留言
 export async function DELETE(
   request: Request,
-  context: { params: { id: string } }
-) {
+  { params }: { params: { id: string } }
+): Promise<Response> {
   try {
     const user = await currentUser();
     
@@ -17,7 +17,7 @@ export async function DELETE(
       return NextResponse.json({ error: "未授权" }, { status: 401 });
     }
     
-    const id = parseInt(context.params.id);
+    const id = parseInt(params.id);
     
     if (isNaN(id)) {
       return NextResponse.json({ error: "无效的ID" }, { status: 400 });
