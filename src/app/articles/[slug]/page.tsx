@@ -2,14 +2,14 @@ import { Metadata } from "next";
 import { client } from "@/lib/sanity/lib/client";
 import { ArticleView } from "@/components/article-view";
 
-interface PageParams {
+type ArticlePageParams = {
   params: {
     slug: string;
   };
 }
 
 // 动态生成页面元数据
-export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
+export async function generateMetadata({ params }: ArticlePageParams): Promise<Metadata> {
   const { slug } = params;
   
   try {
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   };
 }
 
-export default function ArticlePage({ params }: PageParams) {
+export default async function ArticlePage({ params }: ArticlePageParams) {
   const { slug } = params;
   
   return (
