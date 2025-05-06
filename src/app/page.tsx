@@ -18,6 +18,11 @@ const LazyCaseStudy = dynamic(() => import('@/components/CaseStudy'), {
   loading: () => <div>加载中...</div>,  // 加载时显示的内容
   ssr: true  // 是否在服务器端渲染，默认为 true
 });
+const LazyLate = dynamic(() => import('@/components/footer'), {
+  loading: () => <div>加载中...</div>,  // 加载时显示的内容
+  ssr: true  // 是否在服务器端渲染，默认为 true
+});
+
 
 export default function Home() {
   return (
@@ -31,12 +36,16 @@ export default function Home() {
       <section className="h-screen">
         <LazyPhotoBlock />
       </section>
-      <section className="h-screen">
+      <section >
         <LazyWelcome />
       </section>
-      <section className="h-screen">
+      <section >
         <LazyCaseStudy />
       </section>
+      <section >
+        <LazyLate />
+      </section>
+
     </div>
   );
 }

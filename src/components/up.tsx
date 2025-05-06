@@ -1,17 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { client } from "@/lib/sanity/lib/client";
 import { Pointer } from "@/components/magicui/pointer";
 import { ScratchToReveal } from "@/components/magicui/scratch-to-reveal";
-import { FlipText } from "@/components/magicui/flip-text";
+
 
 export function Welcome() {
   // 定义状态来存储从Sanity获取的故事数据
   const [stories, setStories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [scratchSize, setScratchSize] = useState({ width: 300, height: 150 });
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   // 定义默认数据，在加载时或出错时显示
   const defaultTestimonials = [
@@ -48,6 +50,24 @@ export function Welcome() {
     };
     
     fetchStories();
+    
+    // 计算ScratchToReveal的尺寸
+    const updateScratchSize = () => {
+      const containerWidth = containerRef.current ? containerRef.current.offsetWidth : 0;
+      const width = Math.min(550, containerWidth - 20);
+      const height = Math.min(250, width * 0.45);
+      setScratchSize({ width, height });
+    };
+    
+    updateScratchSize();
+    
+    // 添加窗口大小变化事件监听器
+    window.addEventListener('resize', updateScratchSize);
+    
+    // 清理事件监听器
+    return () => {
+      window.removeEventListener('resize', updateScratchSize);
+    };
   }, []);
   
   // 使用从Sanity获取的数据或默认数据
@@ -55,8 +75,8 @@ export function Welcome() {
   
   return (
     // 顶部文字部分
-    <div className="w-full flex mb-16">
-      <Pointer>
+    <div className="w-full flex flex-col md:flex-row mb-8 md:mb-16 px-4 md:px-0">
+      <Pointer className="hidden md:block">
           <svg
             width="24"
             height="24"
@@ -69,10 +89,10 @@ export function Welcome() {
           </svg>
         </Pointer>
       {/* 左侧文字 div */}
-      <div className="w-1/2 pl-[5%]">
+      <div className="w-full md:w-1/2 md:pl-[5%] mb-8 md:mb-0">
         <div className="max-w-[600px] space-y-4">
           <BoxReveal boxColor={"#212f3d"} duration={0.5}>
-            <p className="text-[1.5rem] font-medium leading-relaxed">
+            <p className="text-lg md:text-[1.5rem] font-medium leading-relaxed">
               我在网上看见了关于
               <span className="text-[#99CCFF]">#编程</span>、
               <span className="text-[#99CCFF]">#游戏</span>、
@@ -84,36 +104,34 @@ export function Welcome() {
           </BoxReveal>
           
           <BoxReveal boxColor={"#212f3d"} duration={1}>
-            <p className="text-[1.5rem] font-medium leading-relaxed">
-          
+            <p className="text-lg md:text-[1.5rem] font-medium leading-relaxed">
               这些故事令我印象深刻，我决定将它们分享给大家。
-            
             </p>
           </BoxReveal>
           
-          <p className="text-[1.5rem] font-medium leading-relaxed">
+          <p className="text-lg md:text-[1.5rem] font-medium leading-relaxed">
             <span className="inline-block bg-[#3eede7] dark:bg-[#FFE4CC]/90 px-4 py-1 rounded-lg">
               <TextAnimate animation="blurInUp" by="character">
-              
                 讲述世界故事的方式有无数种，这是我的方式。
               </TextAnimate>
             </span>
           </p>
-          <ScratchToReveal
-            width={550}
-            height={250}
-            minScratchPercentage={70}
-            className="flex items-center justify-center overflow-hidden rounded-2xl border-2 bg-gray-100"
-            gradientColors={["#A97CF8", "#F38CB8", "#FDCC92"]}
-          >
-            <span className="text-2xl">Happy every day</span>
-          </ScratchToReveal>
+          <div className="w-full overflow-hidden" ref={containerRef}>
+            <ScratchToReveal
+              width={scratchSize.width}
+              height={scratchSize.height}
+              minScratchPercentage={70}
+              className="flex items-center justify-center overflow-hidden rounded-2xl border-2 bg-gray-100"
+              gradientColors={["#A97CF8", "#F38CB8", "#FDCC92"]}
+            >
+              <span className="text-base md:text-2xl">Happy every day</span>
+            </ScratchToReveal>
+          </div>
         </div>
-        
       </div>
 
       {/* 右侧 div - 显示故事 */}
-      <div className="w-1/2">
+      <div className="w-full md:w-1/2">
         {isLoading ? (
           <div className="flex justify-center items-center h-full">
             <p className="text-xl text-gray-500">正在加载故事...</p>

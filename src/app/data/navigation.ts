@@ -28,8 +28,8 @@ export const navLinks = [
    
   },
   {
-    name: 'Cartoon',
-    href: 'cartoon',
+    name: '照片',
+    href: 'photo',
     
   }
 ];
