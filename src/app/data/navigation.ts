@@ -53,7 +53,7 @@ export const socialLinks = [
   },
   {
     name: 'TikTok',
-    href: 'https://www.douyin.com/user/self?from_tab_name=main', // 请替换成你的抖音主页链接
+    href: 'https://v.douyin.com/sbCc09Nem6E/ 4@0.com :7pm', // 请替换成你的抖音主页链接
     icon: SiTiktok
   },
   {

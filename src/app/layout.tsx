@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 // app/layout.tsx
 import 'easymde/dist/easymde.min.css'
+import { zhCN } from '@clerk/localizations'
 import {
   ClerkProvider,
   SignInButton,
@@ -25,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider >
+    <ClerkProvider localization={zhCN}   >
     <html lang="zh-CN">
       <body>
         <Navbar />
