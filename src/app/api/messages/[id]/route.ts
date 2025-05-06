@@ -1,14 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { deleteMessage } from "@/lib/db/queries";
 import { currentUser } from '@clerk/nextjs/server';
 import { revalidatePath } from "next/cache";
 
 // 删除特定留言
 export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
 ): Promise<Response> {
   try {
+    // 获取路径中的ID
+    const id = parseInt(request.nextUrl.pathname.split('/').pop() || '');
+    
     const user = await currentUser();
     
     // 检查用户是否已登录且有管理员权限
@@ -16,8 +18,6 @@ export async function DELETE(
     if (!user) {
       return NextResponse.json({ error: "未授权" }, { status: 401 });
     }
-    
-    const id = parseInt(params.id);
     
     if (isNaN(id)) {
       return NextResponse.json({ error: "无效的ID" }, { status: 400 });
