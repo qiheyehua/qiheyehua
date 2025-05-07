@@ -30,7 +30,7 @@ export default function Home() {
       <section className="h-[150vh]">
         <Main />
       </section>
-      <section className="h-screen">
+      <section >
         <LazyWhiteModule />
       </section>
       <section className="h-screen">
