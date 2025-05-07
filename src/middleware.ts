@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 // 定义公共路由
 const isPublicRoute = createRouteMatcher([
     '/',            // 首页
+    '/3D',
     '/Messagewall', // 留言墙
     '/project',     // 项目
     '/articles(.*)', // 文章

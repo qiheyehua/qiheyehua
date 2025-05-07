@@ -31,6 +31,10 @@ export const navLinks = [
     name: '照片',
     href: 'photo',
     
+  },
+  {
+    name: '3D相册',
+    href: '3D',
   }
 ];
 
