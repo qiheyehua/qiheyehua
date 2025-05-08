@@ -206,52 +206,59 @@ export function WhiteModule() {
   );
 
   return (
-    <div className="relative flex size-full">
+    <div className="relative w-full min-h-screen bg-white">
       {/* 背景水滴 - BackgroundBeamsWithCollision 组件 */}
-      <BackgroundBeamsWithCollision>
-      {/* 指针 - Pointer 组件 */}
-      <Pointer className="fill-blue-500" />
-      {/* 左侧面板 - Lens 组件 */}
-      <div className="w-1/3 h-full flex items-center justify-center p-8 bg-white">
-        <Card className="relative max-w-md shadow-none">
-          <CardHeader>
-            <Lens
-              zoomFactor={2}
-              lensSize={150}
-              isStatic={false}
-              ariaLabel="Zoom Area"
-            >
-              <img
-                src="https://res.cloudinary.com/dqsej8eol/image/upload/v1738573813/674aa6090ebe5_vhudzp.jpg"
-                alt="image placeholder"
-                width={500}
-                height={500}
-              />
-            </Lens>
-          </CardHeader>
-          <CardContent>
-            <CardTitle className="text-1xl">七禾页话</CardTitle>
-            <CardDescription>
-              搞怪的不是红绿灯,不是时机,
-             <ColourfulText text="而是我数不清的犹豫" />
-            </CardDescription>
-          </CardContent>
-        </Card>
-      </div>
-      
-      {/* 中间面板 - IconCloud 组件 */}
-      <div className="w-1/3 h-full flex items-center justify-center p-8 bg-white">      
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">心灯已似风灯冷</h2>
-          <p className="text-gray-600 mb-6">希望终从以下生</p>
-          <IconCloud images={images} />
+      <BackgroundBeamsWithCollision className="h-full">
+        {/* 指针 - Pointer 组件 */}
+        <Pointer className="fill-blue-500" />
+        
+        {/* 响应式布局容器 */}
+        <div className="w-full flex flex-col lg:flex-row">
+          {/* 左侧面板 - Lens 组件 */}
+          <div className="w-full lg:w-1/3 py-12 px-4 md:p-8 bg-white flex items-center justify-center">
+            <Card className="relative w-full max-w-md shadow-none">
+              <CardHeader>
+                <Lens
+                  zoomFactor={2}
+                  lensSize={150}
+                  isStatic={false}
+                  ariaLabel="Zoom Area"
+                >
+                  <img
+                    src="https://res.cloudinary.com/dqsej8eol/image/upload/v1738573813/674aa6090ebe5_vhudzp.jpg"
+                    alt="image placeholder"
+                    width={500}
+                    height={500}
+                    className="w-full h-auto"
+                  />
+                </Lens>
+              </CardHeader>
+              <CardContent>
+                <CardTitle className="text-xl md:text-2xl">七禾页话</CardTitle>
+                <CardDescription className="text-sm md:text-base">
+                  搞怪的不是红绿灯,不是时机,
+                 <ColourfulText text="而是我数不清的犹豫" />
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+          
+          {/* 中间面板 - IconCloud 组件 */}
+          <div className="w-full lg:w-1/3 py-12 px-4 md:p-8 bg-white flex items-center justify-center">      
+            <div className="text-center w-full max-w-md">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">心灯已似风灯冷</h2>
+              <p className="text-sm md:text-base text-gray-600 mb-6">希望终从以下生</p>
+              <div className="w-full h-64 md:h-80 mx-auto">
+                <IconCloud images={images} />
+              </div>
+            </div>
+          </div>
+          
+          {/* 右侧面板 - AnimatedListDemo 组件 */}
+          <div className="w-full lg:w-1/3 py-12 px-4 md:p-8 bg-white flex items-center justify-center">
+            <AnimatedListDemo className="w-full max-w-sm h-[400px]" />
+          </div>
         </div>
-      </div>
-      
-      {/* 右侧面板 - AnimatedListDemo 组件 */}
-      <div className="w-1/3 h-full flex items-center justify-center p-8 bg-white">
-        <AnimatedListDemo className="max-w-sm" />
-      </div>
       </BackgroundBeamsWithCollision>
     </div>
   );

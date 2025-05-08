@@ -15,6 +15,31 @@ interface PhotoItem {
 export function PhotoBlock() {
   const [items, setItems] = useState<PhotoItem[]>([]);
   
+  const positionClasses = [
+    "absolute top-10 left-[20%] rotate-[-5deg]",
+    "absolute top-40 left-[25%] rotate-[-7deg]",
+    "absolute top-5 left-[40%] rotate-[8deg]",
+    "absolute top-32 left-[55%] rotate-[10deg]",
+    "absolute top-20 right-[35%] rotate-[2deg]",
+    "absolute top-24 left-[45%] rotate-[-7deg]",
+    "absolute top-8 left-[30%] rotate-[4deg]",
+    "absolute top-16 left-[60%] rotate-[-3deg]",
+    "absolute top-36 left-[15%] rotate-[6deg]",
+    "absolute top-28 right-[25%] rotate-[-8deg]",
+    "absolute top-12 left-[50%] rotate-[9deg]",
+    "absolute top-48 left-[35%] rotate-[-4deg]",
+  ];
+  
+  // 随机打乱数组函数
+  const shuffleArray = (array: string[]) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+  
   useEffect(() => {
     // 定义Sanity查询
     const query = `*[_type == "photo"] {
@@ -23,25 +48,17 @@ export function PhotoBlock() {
       className
     }`;
     
+    // 打乱位置数组
+    const randomPositions = shuffleArray(positionClasses);
+    
     // 执行查询
     client.fetch(query).then((photos) => {
       if (photos && photos.length > 0) {
-        // 直接通过索引赋值给items数组
-        const newItems = [...items]; // 创建items的副本
-        
-        // 确保数组长度足够
-        while (newItems.length < photos.length) {
-          newItems.push({ title: "", image: "", className: "" });
-        }
-        
-        // 使用索引方式逐个赋值
-        for (let i = 0; i < photos.length; i++) {
-          newItems[i] = {
-            title: photos[i].title,
-            image: photos[i].image,
-            className: photos[i].className || `absolute top-${10 + i * 5} left-[${20 + i * 5}%] rotate-[${i * 2}deg]`,
-          };
-        }
+        const newItems = photos.map((photo: any, index: number) => ({
+          title: photo.title,
+          image: photo.image,
+          className: photo.className || randomPositions[index % randomPositions.length]
+        }));
         
         setItems(newItems);
       }
