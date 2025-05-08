@@ -6,46 +6,14 @@ import {
   DraggableCardContainer,
 } from "@/components/ui/draggable-card";
 
+interface PhotoItem {
+  title: string;
+  image: string;
+  className: string;
+}
+
 export function PhotoBlock() {
-  const [items, setItems] = useState([
-    {
-      title: "地平线",
-      image: "https://res.cloudinary.com/dqsej8eol/image/upload/v1738573977/679e36269d0e4_xtwb4s.jpg",
-      className: "absolute top-10 left-[20%] rotate-[-5deg]",
-    },
-    {
-      title: "星空",
-      image:
-        "https://res.cloudinary.com/dqsej8eol/image/upload/v1738573847/67a0533f3102a_lyyvvl.jpg",
-      className: "absolute top-40 left-[25%] rotate-[-7deg]",
-    },
-    {
-      title: "人生照片",
-      image:
-        "https://res.cloudinary.com/dqsej8eol/image/upload/v1746285789/ns2ipxj8lcbr19nu7r0n.jpg",
-      className: "absolute top-5 left-[40%] rotate-[8deg]",
-    },
-    {
-      title: "人生照片",
-      image:
-        "https://res.cloudinary.com/dqsej8eol/image/upload/v1746285789/ns2ipxj8lcbr19nu7r0n.jpg",
-      className: "absolute top-5 left-[20%] rotate-[10deg]",
-    },
-    {
-      title: "日落树",
-      image:
-        "https://res.cloudinary.com/dqsej8eol/image/upload/v1746285995/rxob8m5kzb6v4y5aunml.jpg",
-      className: "absolute top-32 left-[55%] rotate-[10deg]",
-    },
-    
-    {
-      title: "New Zealand",
-      image:
-        "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=3070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      className: "absolute top-24 left-[45%] rotate-[-7deg]",
-    },
-   
-  ]);
+  const [items, setItems] = useState<PhotoItem[]>([]);
   
   useEffect(() => {
     // 定义Sanity查询

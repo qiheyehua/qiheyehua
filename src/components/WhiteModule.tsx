@@ -232,8 +232,8 @@ export function WhiteModule() {
           <CardContent>
             <CardTitle className="text-1xl">七禾页话</CardTitle>
             <CardDescription>
-              为什么是七禾页话？
-             <ColourfulText text=" 因为七禾页是一个字," />，我想说的话都在这个字里。
+              搞怪的不是红绿灯,不是时机,
+             <ColourfulText text="而是我数不清的犹豫" />
             </CardDescription>
           </CardContent>
         </Card>
