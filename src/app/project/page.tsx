@@ -4,22 +4,8 @@ import { client } from '@/lib/sanity/lib/client';
 import { Meteors } from "@/components/magicui/meteors";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
-// 获取所有项目
-async function getAllProjects() {
-  const query = `
-    *[_type == "project"] {
-      _id,
-      name,
-      url,
-      description,
-      "iconUrl": icon.asset->url,
-      _createdAt
-    } | order(_createdAt desc)
-  `;
-  const data = await client.fetch(query);
-  
-  return data;
-}
+// 设置页面重新验证时间
+export const revalidate = 60; // 每60秒重新验证一次
 
 // 定义项目数据类型
 interface Project {
@@ -41,11 +27,27 @@ function getHostname(url: string): string {
   }
 }
 
-// 将组件转换为异步组件
-const WhiteModule = async () => {
-  // 从Sanity获取项目数据
-  const projects = await getAllProjects();
+// 获取所有项目的数据函数
+async function getProjects() {
+  const query = `
+    *[_type == "project"] {
+      _id,
+      name,
+      url,
+      description,
+      "iconUrl": icon.asset->url,
+      _createdAt
+    } | order(_createdAt desc)
+  `;
+  const projects = await client.fetch(query);
+  return projects;
+}
 
+// 页面组件
+export default async function Page() {
+  // 获取项目数据
+  const projects = await getProjects();
+  
   return (
     <div className="bg-white py-12">
       <SmoothCursor />
@@ -105,6 +107,4 @@ const WhiteModule = async () => {
       </div>
     </div>
   );
-};
-
-export default WhiteModule; 
+} 
