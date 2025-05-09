@@ -3,6 +3,7 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { client } from '@/lib/sanity/lib/client';
 import { Meteors } from "@/components/magicui/meteors";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
+
 // 获取所有项目
 async function getAllProjects() {
   const query = `
@@ -42,32 +43,15 @@ function getHostname(url: string): string {
 
 // 将组件转换为异步组件
 const WhiteModule = async () => {
-  // 从Sanity获取真实项目数据
+  // 从Sanity获取项目数据
   const projects = await getAllProjects();
-  
-  //硬编码测试数据（如果Sanity接口不可用）
-  const fallbackProjects: Project[] = [
-    {
-      _id: "19d1e029-16dc-4b7f-8208-d9ddb7823502",
-      name: "在线简历展示",
-      url: "https://cali.so/projects",
-      description: "通过这个网站可以展示你的项目经历以及技能展示",
-      iconUrl: "https://cdn.sanity.io/images/w04355b9/production/5cc00e58b80c85ea508a6809f7897baa3ba883c5-1080x1080.jpg",
-      _createdAt: "2025-04-30T06:57:43Z"
-    }
-  ];
-
-  // 使用Sanity数据或回退到测试数据
-  const displayProjects = projects && projects.length > 0 ? projects : fallbackProjects;
 
   return (
     <div className="bg-white py-12">
       <SmoothCursor />
       <div className="container mx-auto px-4">
-        
-        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {displayProjects.map((project: Project, index: number) => (
+          {projects.map((project: Project) => (
             <CardContainer key={project._id} className="w-full">
               <CardBody className="h-auto w-full rounded-xl border border-gray-200 shadow-sm bg-white relative">
                 {/* 流星背景效果 */}
